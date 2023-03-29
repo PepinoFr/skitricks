@@ -1,0 +1,12 @@
+swiftmailer:
+    default_mailer: default
+    mailers:
+        default:
+            url: '%env(MAILER_URL)%'
+            transport: gmail
+            username: mathieulagnel@gmail.com
+            password: pzbwrwqdkoturhyhsdzq
+            host: smtp.gmail.com
+            port: 465
+            encryption: ssl
+            auth_mode: login

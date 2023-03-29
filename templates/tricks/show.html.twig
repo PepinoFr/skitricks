@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <articles>
+        <h2>{{ trick.name }}</h2>
+        <div class="metadata">Ecrit le {{ trick.createdAt | date('d/m/y') }} à {{trick.createdAt | date('H:i') }} dans la catégorie
+        {{ trick.category.title  }} par {{ trick.user.username }}</div>
+        <div class="content"><img src="{{ trick.image }}" alt="">
+            {{ trick.content | raw }}
+        </div>
+    </articles>
+
+   <section id="commentaire">
+       <h1>{{ trick.comments | length }} Commentaire :</h1>
+       {% if app.user %}
+       {{ form_start(commentForm) }}
+       {{ form_row(commentForm.text , {'label':" Ajouter de commentaire",'attr': {'placeholder': "Votre commentaire"}}) }}
+       <button type="submit" class="btn btn-success" > Valider </button>
+       {{ form_end(commentForm) }}
+       {% endif %}
+       {% for comment in paginator %}
+           <div class="comment">
+               <div class="row">
+                   <div class="col-2">
+                       {{ comment.user.username }} (<small> {{ comment.createdAt | date('d/m/y à H:i') }} </small>)
+                   </div>
+                   <div class="col">
+                        {{ comment.text | raw }}
+                   </div>
+               </div>
+           </div>
+       {% endfor %}
+       <div class="navigation">
+           {{ knp_pagination_render(paginator) }}
+       </div>
+       {% for i in 1..trick.image %}
+           <img src="{{ asset("images/tricks/#{trick.id}/#{i}.jpg") }}" />
+       {% endfor %}
+
+       <iframe width="500" height="250" src="https://www.youtube.com/embed/zNooIXKQTOw" title="C'ÉTAIT VRAIMENT CLOSE D'APRÈS ZERATOR [Ultimate Chicken Horse]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+   </section>
+{% endblock %}
