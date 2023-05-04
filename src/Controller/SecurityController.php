@@ -52,7 +52,7 @@ class SecurityController extends AbstractController
             $mailer = new Swift_Mailer($transport);
             $message = (new Swift_Message('Wonderful Subject'))
                 ->setFrom(['mathieulagnel@gmail.com' => 'mathieu lagnel'])
-                ->setTo(['mathieulagnel@gmail.com', 'mathieulagnel@gmail.com' => 'toto '])
+                ->setTo([$user->getEmail(), 'mathieulagnel@gmail.com' => 'toto '])
                 ->setBody('lien pour la confimation du compte ' . $this->generateUrl('security_validate',array('token' =>$token),UrlGeneratorInterface::ABSOLUTE_URL)  )
             ;
 

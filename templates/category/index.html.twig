@@ -2,11 +2,13 @@
 {% form_theme formCateg 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-    <h1> creation d'une category</h1>
+    <h1 style="display: flex;justify-content: center;align-items: center"> creation d'une category</h1>
     {{ form_start(formCateg) }}
-    {{ form_row(formCateg.title,{'attr': {'placeholder': "Nom de la category"}}) }}
-
+    <div style="padding-top: 50px;display: flex;align-content: center;justify-content: center">  {{ form_widget(formCateg.title,{'attr': {
+            'style' : 'width:750px', }} ) }} </div>
+    <div style="display: flex;justify-content: center;align-items: center;padding-top: 5px" >
         <button type="submit" class="btn btn-success">  Ajouter la category  </button>
+    </div>
     {{ form_end(formCateg) }}
 
 {% endblock %}

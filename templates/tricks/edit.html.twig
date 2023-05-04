@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(formTrick) }}
+    <articles>
+        <h2> {{ form_widget(formTrick.name,{'attr': {'placeholder': "Nom du trick"}}) }}</h2>
+
+        {% if trick.image > 0 and (asset("images/tricks/#{trick.id}/1.jpg") | ondisk) == true  %}
+            <div style="display: flex;align-items: end;justify-content: end">
+                <a href="{{ url('image_delete',{'id': trick.id,'image':1 } ) }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512">
+                        <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                    </svg>
+                </a>
+            </div>
+            <img height="500" width="100%" style=" object-fit: contain" src="{{ asset("images/tricks/#{trick.id}/1.jpg") }}"/>
+        {% else %}
+            <img height="500" width="100%" style=" object-fit: contain" src=" https://picsum.photos/500"/>
+        {% endif %}
+        <div style="display: flex; grid-template-columns: max-content 260px 1fr;">
+            {% if trick.image > 2 %}
+                {% for i in 2..trick.image -1 %}
+                    <div style="display: flex;flex-direction: row">
+                        {% if not  (asset("images/tricks/#{trick.id}/#{i}.jpg") | ondisk) == false %}
+                            <div style="display: flex;flex-direction: column">
+                                <img height="150" width="250" src="{{ asset("images/tricks/#{trick.id}/#{i}.jpg") }}"/>
+                                <a href="{{ url('image_delete',{'id': trick.id,'image':i } ) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512">
+                                        <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                                    </svg>
+                                </a>
+                            </div>
+
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% set viedo = trick.video|split('|') %}
+                {% for key,value in viedo %}
+                    <div style="display: flex;flex-direction: column;padding-left: 5px">
+                        <iframe width="250" height="150" src="https://www.youtube.com/embed/{{ value }}"></iframe>
+                    </div>
+                {% endfor %}
+            </div>
+        <div style="padding-top: 50px;display: flex;align-content: center;justify-content: center">  {{ form_widget(formTrick.category,{'attr': {
+                'style' : 'width:750px', }} ) }} </div>
+        <div style="padding-top: 50px;display: flex;align-content: center;justify-content: center">  {{ form_widget(formTrick.brochure,{'attr': {
+                'style' : 'width:750px', }} ) }} </div>
+
+        <div style="padding-top: 50px;display: flex;align-content: center;justify-content: center">  {{ form_widget(formTrick.video,{'attr': {
+                'style' : 'width:750px', }} ) }} </div>
+
+        <div style="padding-top: 50px;display: flex;align-content: center;justify-content: center">  {{ form_widget(formTrick.content,{'attr': {
+                'style' : 'width:750px',
+                'rows' : '10',
+                'cols' : '200' }} ) }} </div>
+    </articles>
+
+
+<div style="display: flex;justify-content: center;align-items: center;padding-top: 5px" >
+    <button type="submit" class="btn btn-success">
+        Modifier
+    </button>
+</div>
+
+    {{ form_end(formTrick) }}
+
+{% endblock %}

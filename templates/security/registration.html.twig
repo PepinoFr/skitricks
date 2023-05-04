@@ -2,13 +2,21 @@
 
 
 {% block body %}
-    <h1>Inscription sur le site</h1>
+    <div style="display: flex;align-content: center;justify-content: center">
+        <div style="padding-top: 50px;flex-direction: column;">
+            <h1>Inscription sur le site</h1>
 
-    {{ form_start(form) }}
-    {{ form_row(form.username,{'label':'Nom d\'utilisateur','attr': {'placeholder':'Nom d\'utilisateur'}}) }}
-    {{ form_row(form.email, {'attr':{'placeholder':'Adresse email ...'}}) }}
-    {{ form_row(form.password,{'label':'mot de passe','attr': {'placeholder':'mot de passe'}}) }}
-    {{ form_row(form.confirm_password,{'label':'confirmer mot de passe','attr': {'placeholder':'confirmer mot de passe'}}) }}
+            {{ form_start(form) }}
+             {{  form_row(form.username,{'label':'Nom d\'utilisateur','attr': {
+                    'style' : 'width:500px','placeholder':'Nom d\'utilisateur ' }} ) }}
+            {{ form_row(form.email, {'attr':{'placeholder':'Adresse email ...', 'style' : 'width:500px',}}) }}
+            {{ form_row(form.password,{'label':'mot de passe','attr': {'placeholder':'mot de passe', 'style' : 'width:500px',}}) }}
+            {{ form_row(form.confirm_password,{'label':'confirmer mot de passe','attr': {'placeholder':'confirmer mot de passe', 'style' : 'width:500px',}}) }}
+        </div>
+    </div>
+    <div style="padding-top: 50px;display: flex;align-content: center;justify-content: center">
     <button type="submit" class="btn btn-success"> Incription </button>
+    <div>
     {{ form_end(form) }}
+
 {% endblock %}

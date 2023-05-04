@@ -41,7 +41,6 @@ class TricksController extends AbstractController
 
     /**
      * @Route("/tricks/new", name="tricks_create")
-     * @Route("/tricks/{id}/edit", name="tricks_edit")
      */
     public function form(Trick $trick = null,Request $request, EntityManagerInterface $manager) {
 
@@ -69,9 +68,9 @@ class TricksController extends AbstractController
             $manager->persist($trick);
             $manager->flush();
             $chemin = "images/tricks/".$trick->getId();
-            if (!empty($trick->getImage())) {
+            if (!empty($trick->getImage() )) {
                 $someNewFilename = $trick->getImage().".jpg";
-            } else {
+            } else  {
                 $someNewFilename = "1.jpg";
                 $trick->setImage(1);
             }
@@ -93,6 +92,59 @@ class TricksController extends AbstractController
         ]);
     }
     /**
+     * @Route("/tricks/{id}/edit", name="tricks_edit")
+     */
+    public function formEdit(Trick $trick = null,Request $request, EntityManagerInterface $manager) {
+
+        if(!$trick){
+            $trick = new Trick();
+        }
+        $form = $this->createForm(TrickType::class,$trick);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            if($trick->getId()) {
+                $trick->setUpdateAt(new \DateTime());
+            }
+            else {
+                $trick->setCreatedAt(new \DateTimeImmutable())
+                    ->setUser($this->getUser());
+            }
+            $extensionsValides = array('jpg', 'jpeg', 'png');
+
+
+            define ('SITE_ROOT', realpath(dirname(__FILE__)));
+
+
+            $manager->persist($trick);
+            $manager->flush();
+            $chemin = "images/tricks/".$trick->getId();
+            if (!empty($trick->getImage() && file_exists("images/tricks/".$trick->getId()."/1.jpg"))) {
+                $someNewFilename = $trick->getImage().".jpg";
+            } else {
+                $someNewFilename = "1.jpg";
+                $trick->setImage(1);
+            }
+
+            $file = $form['brochure']->getData();
+
+            if (!empty($file)) {
+                $file->move($chemin, $someNewFilename);
+                $trick->setImage($trick->getImage() + 1);
+            }
+            $manager->persist($trick);
+            $manager->flush();
+            return $this->redirectToRoute('tricks_show',['id'=>$trick->getId()]);
+        }
+
+        return $this->render('tricks/edit.html.twig', [
+            'formTrick' => $form->createView(),
+            'editMode' => $trick->getId() !== null,
+            'trick' => $trick,
+        ]);
+    }
+    /**
      * @Route("/tricks/{id}/delete", name="tricks_delete")
      */
     public function deleteTrick(Trick $trick = null, EntityManagerInterface $manager) {
@@ -107,6 +159,26 @@ class TricksController extends AbstractController
         $manager->flush();
 
         return $this->redirect($this->generateUrl('tricks'));
+    }
+    /**
+     * @Route("/tricks/{id}/delete/{image}", name="image_delete")
+     */
+    public function deleteImage(Trick $trick = null,$image=-1, EntityManagerInterface $manager) {
+
+        if ($image != -1) {
+            $chemin = "images/tricks/".$trick->getId()."/".$image.".jpg";;
+            unlink( $chemin);
+            if ($image == 1 ) {
+                for ($i = 2; $i < $trick->getImage(); $i++) {
+                    if (file_exists("images/tricks/".$trick->getId()."/".$i.".jpg")) {
+                        rename("images/tricks/".$trick->getId()."/".$i.".jpg","images/tricks/".$trick->getId()."/1.jpg");
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $this->redirectToRoute('tricks_edit',['id'=>$trick->getId()]);
     }
     /**
      * @Route("/comment/{id}/delete", name="comment_delete")

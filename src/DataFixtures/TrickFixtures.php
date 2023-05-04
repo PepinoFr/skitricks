@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Comment;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Trick;
@@ -13,8 +14,32 @@ class TrickFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr_FR');
-        for ($i = 1; $i <= 3 ; $i++) {
+
+        $user = new User();
+        $user->setUsername('mathieu');
+        $user->setEmail('testfixture@gmail.com');
+        $user->setPassword('test');
+        $user->setIsValidate('1');
+        $manager->persist($user);
+
+        $category = new Category();
+        $category->setTitle('Les grabs');
+        $manager->persist($category);
+
+        $trick = new Trick();
+       $faker = Factory::create('fr_FR');
+        $trick = new Trick();
+        $content = '<p>' . join($faker->paragraphs(5),'</p</p>') . '</p>';
+        $trick->setName($faker->sentence())
+            ->setUser($user)
+            ->setContent($content)
+            ->setImage(2)
+            ->setVideo('My007vQdlto|2ZNuMscwL7c')
+            ->setCategory($category)
+            ->setCreatedAt(new \DateTimeImmutable());
+
+        $manager->persist($trick);
+       /* for ($i = 1; $i <= 3 ; $i++) {
             $category = new Category();
             $category->setTitle($faker->sentence());
             $manager->persist($category);
@@ -37,7 +62,7 @@ class TrickFixtures extends Fixture
                     $manager->persist($comment);
                 }
             }
-        }
+        }*/
         $manager->flush();
     }
 }
