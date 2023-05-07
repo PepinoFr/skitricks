@@ -1,10 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1> modification  d'un user</h1>
-{{ form_start(formUser) }}
+<div style="display: flex;align-content: center;justify-content: center">
+    <div style="padding-top: 50px;flex-direction: column;">
+        <h1> Modification  d'un user</h1>
+    {{ form_start(formUser) }}
+        <div style="padding-top: 25px;display: flex;align-content: center;justify-content: center">  {{ form_widget(formUser.email,{'attr': {
+                'style' : 'width:250px', }} ) }} </div>
+        <div style="padding-top: 25px;display: flex;align-content: center;justify-content: center">  {{ form_widget(formUser.username,{'attr': {
+                'style' : 'width:250px', }} ) }} </div>
+        <div style="padding-top: 25px;display: flex;align-content: center;justify-content: center">  {{ form_widget(formUser.brochure,{'attr': {
+                'style' : 'width:250px', }} ) }} </div>
+        <div style="display: flex;justify-content: center;align-items: center;padding-top: 5px" >
+            <button type="submit" class="btn btn-success">
+                Modifier
+            </button>
+        </div>
+    </div>
+</div>
 
-<button type="submit" class="btn btn-success">  Modifier   </button>
 {{ form_end(formUser) }}
 
 {% endblock %}

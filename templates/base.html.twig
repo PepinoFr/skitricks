@@ -17,7 +17,7 @@
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Skitricks</a>
+            <a class="navbar-brand" href="/">Skitricks</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -30,24 +30,25 @@
                     </li>
                     {% if  app.user %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('tricks_create') }}">tricks</a>
+                        <a class="nav-link" href="{{ path('tricks_create') }}">Créer un trick</a>
                     </li>
                     {% endif %}
                     {% if not app.user %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('security_login') }}">login</a>
+                        <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('security_registration') }}">sing up</a>
+                        <a class="nav-link" href="{{ path('security_registration') }}">Inscription</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('security_logout') }}">logout</a>
+                        <a class="nav-link" href="{{ path('add_category') }}">Créer une catégorie</a>
                     </li>
-                    {% endif %}
-                    {% if  app.user %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('add_category') }}">cree category</a>
+                        <a class="nav-link" href="{{ url('security_edit',{'id': app.user.id } ) }}">Modifier le profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
                     </li>
                     {% endif %}
                 </ul>

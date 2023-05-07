@@ -1,28 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Binvenue dans ce blog</h1>
+<h1>Bienvenue dans ce blog</h1>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci aperiam assumenda commodi cum distinctio eius
-    illo iste ut veritatis? Ab aliquam eius laboriosam laborum, laudantium nihil nostrum placeat, quod similique tempore
-    unde, voluptas? Inventore nostrum quisquam voluptate? Debitis, illum.</p><p>A animi architecto aspernatur assumenda
-    doloremque dolorum earum eius expedita explicabo facere impedit iste magni nemo neque nesciunt nostrum nulla officia
-    quidem quod ratione repellat sapiente similique sit sunt, totam vero voluptatibus! Assumenda et iusto modi odio
-    quos, reiciendis totam.</p>
+<p>Le blog est une ressource en ligne dédiée aux passionnés de ski et de freestyle. Il est conçu pour offrir une expérience utilisateur optimale, avec une interface utilisateur intuitive et facile à naviguer. Les articles sont régulièrement publiés sur les dernières tendances et actualités du monde du ski, écrits par des professionnels de l'industrie, des athlètes de renom et des experts en freestyle, offrant ainsi un contenu de qualité supérieure aux utilisateurs.
+
+    Les articles sur le blog couvrent une large gamme de sujets, allant des figures de ski et des astuces pour les skieurs débutants et avancés, aux équipements de ski, aux conditions de neige et aux stations de ski à travers le monde. Les utilisateurs peuvent également trouver des conseils sur la planification de voyages de ski et des informations sur les dernières tendances de l'industrie.
+
+    Le blog offre également une plateforme communautaire pour les skieurs passionnés, où ils peuvent se connecter, échanger des conseils et partager leur amour pour le sport. Les utilisateurs peuvent commenter les articles, poser des questions et partager leurs propres expériences de ski.
+
+    En somme, le blog est une ressource essentielle pour les skieurs de tous niveaux, offrant des informations, des conseils et des astuces sur les figures de ski, ainsi que sur les dernières tendances et actualités de l'industrie. La communauté en ligne de skieurs passionnés sur le blog offre également un endroit où les skieurs peuvent se connecter, échanger des conseils et partager leur amour pour le sport.</p>
 
 
 
     <section class="articles">
 
         <h1 class="flex flex-wrap justify-center mb-16 text-7xl p-2 " > Les tricks </h1>
-        <article style=" display: grid;grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));grid-gap: 20px;">
+        <div style=" display: grid;grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));grid-gap: 20px;">
         {% for trick in tricks  %}
             <article style="display: grid; grid-template-rows: max-content 200px 1fr;">
                 <a href="{{ path('tricks_show',{'id': trick.id}) }}">
-                {% if trick.image > 0 %}
+                {% if trick.image > 0 and (asset("images/tricks/#{trick.id}/1.jpg") | ondisk) == true %}
                     <img  height="200" width="200" style=" object-fit: cover" src="{{ asset("images/tricks/#{trick.id}/1.jpg") }}" />
                 {% else %}
-                    <img height="200" style=" object-fit: cover" src=" https://picsum.photos/200"  />
+                    <img height="200" style=" object-fit: cover" src="https://picsum.photos/200"  />
                 {% endif %}
                 <h4>{{trick.name}}</h4>
                 <div>

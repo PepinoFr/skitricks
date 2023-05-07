@@ -4,6 +4,7 @@
 
     {{ form_start(formTrick) }}
     <articles>
+        <h1> Modification d'un trick</h1>
         <h2> {{ form_widget(formTrick.name,{'attr': {'placeholder': "Nom du trick"}}) }}</h2>
 
         {% if trick.image > 0 and (asset("images/tricks/#{trick.id}/1.jpg") | ondisk) == true  %}
@@ -38,12 +39,14 @@
                     </div>
                     {% endfor %}
                 {% endif %}
-                {% set viedo = trick.video|split('|') %}
-                {% for key,value in viedo %}
-                    <div style="display: flex;flex-direction: column;padding-left: 5px">
-                        <iframe width="250" height="150" src="https://www.youtube.com/embed/{{ value }}"></iframe>
-                    </div>
-                {% endfor %}
+                {% if trick.video %}
+                    {% set viedo = trick.video|split('|') %}
+                    {% for key,value in viedo %}
+                        <div style="display: flex;flex-direction: column;padding-left: 5px">
+                            <iframe width="250" height="150" src="https://www.youtube.com/embed/{{ value }}"></iframe>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         <div style="padding-top: 50px;display: flex;align-content: center;justify-content: center">  {{ form_widget(formTrick.category,{'attr': {
                 'style' : 'width:750px', }} ) }} </div>

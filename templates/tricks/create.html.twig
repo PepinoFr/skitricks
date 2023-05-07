@@ -5,7 +5,7 @@
     {% if editMode %}
         <h1> modification d'un trick</h1>
     {% else %}
-        <h1> creation d'un trick</h1>
+        <h1> Creation d'un trick</h1>
     {% endif %}
 
 
@@ -13,11 +13,11 @@
 
     {{ form_row(formTrick.name,{'attr': {'placeholder': "Nom du trick"}}) }}
     {{ form_row(formTrick.category) }}
-    {{ form_row(formTrick.content,{'attr': {'placeholder': "desciption "}}) }}
+    {{ form_row(formTrick.content,{'attr': {'placeholder': "Desciption "}}) }}
     {{ form_row(formTrick.brochure ) }}
-    {{ form_row(formTrick.video,{'attr': {'placeholder': "url de la video"}} ) }}
+    {{ form_row(formTrick.video,{'attr': {'placeholder': "Code des vidéo séparé par |"}} ) }}
 
-    <button type="submit" class="btn btn-success">
+    <button style="margin-top: 5px" type="submit" class="btn btn-success">
         {% if editMode %}
             Modifier
         {% else %}

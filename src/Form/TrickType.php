@@ -23,7 +23,7 @@ class TrickType extends AbstractType
             ])
             ->add('content')
             ->add('brochure', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => 'ajouter une photo',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
