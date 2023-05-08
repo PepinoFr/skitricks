@@ -36,7 +36,7 @@ Le skieur continue la rotation jusqu'à ce qu'il ait effectué un tour complet d
 L'un des éléments clés de la réussite de cette figure est le maintien d'une position de ski stable et équilibrée pendant la rotation. Le skieur doit garder les skis bien écartés pour maintenir sa position de rotation et éviter de s'emmêler les skis pendant la figure. La position de ski doit également être suffisamment stable pour permettre au skieur de contrôler sa rotation et d'atterrir en toute sécurité.
 
 Le Japanese Air est une figure très impressionnante qui nécessite une grande maîtrise technique et une bonne condition physique. Les skieurs qui parviennent à maîtriser cette figure peuvent réaliser des performances impressionnantes dans les compétitions de freestyle, tout en offrant un spectacle spectaculaire pour les spectateurs.";
-        $trick->setName('Japanese Air')
+        $trick->setName('japanese Air')
             ->setUser($user)
             ->setContent($content)
             ->setImage(2)
@@ -124,7 +124,7 @@ Une fois que le skieur a effectué trois tours complets dans les airs, il doit s
 Le 1080 est une figure de ski freestyle extrêmement difficile et spectaculaire pour les spectateurs. Seuls les skieurs les plus expérimentés peuvent réaliser cette figure, qui nécessite une grande habileté technique, une bonne condition physique et beaucoup d'entraînement. Les skieurs les plus talentueux peuvent ajouter des variations à cette figure, comme des sauts acrobatiques ou des grabs pour encore plus de spectacle.
 
 En somme, la figure de ski 1080 consiste en trois rotations complètes de 360 degrés dans les airs pendant un saut sur une bosse ou une rampe. C'est une figure très technique et très spectaculaire qui est réservée aux skieurs les plus expérimentés et les plus talentueux.";
-        $trick5->setName('720')
+        $trick5->setName('1080')
             ->setUser($user)
             ->setContent($content)
             ->setImage(1)
