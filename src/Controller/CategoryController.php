@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $manager->persist($categ);
             $manager->flush();
-            return $this->redirectToRoute('tricks');
+            return $this->redirectToRoute('tricks',['categ'=>true]);
         }
 
         $form->handleRequest($request);

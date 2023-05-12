@@ -1,9 +1,14 @@
 # skitricks
 
+# env php 7.4
+# env Symfony 5.4
+
 # git clone https://github.com/PepinoFr/skitricks.git
 # si pas composer
 # curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 # php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+# composer init
+# composer require symfony/http-foundation
 # Il faut créer une base de données donc 
 # php bin/console doctrine:database:create
 # modifier la variable "DATABASE_URL" dans le fichier .env pour modifier "skitricks" par le nom donné

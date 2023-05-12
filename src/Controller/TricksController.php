@@ -83,7 +83,9 @@ class TricksController extends AbstractController
             }
             $manager->persist($trick);
             $manager->flush();
-            return $this->redirectToRoute('tricks_show',['id'=>$trick->getId()]);
+
+
+            return $this->redirectToRoute('tricks_show',['id'=>$trick->getId(),'success'=>true]);
         }
 
         return $this->render('tricks/create.html.twig', [
@@ -135,7 +137,7 @@ class TricksController extends AbstractController
             }
             $manager->persist($trick);
             $manager->flush();
-            return $this->redirectToRoute('tricks_show',['id'=>$trick->getId()]);
+            return $this->redirectToRoute('tricks_show',['id'=>$trick->getId(),'edit'=>true]);
         }
 
         return $this->render('tricks/edit.html.twig', [
@@ -158,7 +160,7 @@ class TricksController extends AbstractController
         $manager->remove($trick);
         $manager->flush();
 
-        return $this->redirect($this->generateUrl('tricks'));
+        return $this->redirectToRoute('tricks_show',['id'=>$trick->getId(),'delete'=>true]);
     }
     /**
      * @Route("/tricks/{id}/delete/{image}", name="image_delete")
@@ -178,7 +180,7 @@ class TricksController extends AbstractController
             }
         }
 
-        return $this->redirectToRoute('tricks_edit',['id'=>$trick->getId()]);
+        return $this->redirectToRoute('tricks_edit',['id'=>$trick->getId(),'delete'=>true]);
     }
     /**
      * @Route("/comment/{id}/delete", name="comment_delete")
@@ -223,7 +225,7 @@ class TricksController extends AbstractController
         return $this->render('tricks/show.html.twig',[
             'trick' => $trick,
             'paginator' => $paginator,
-            'commentForm' => $form->createView()
+            'commentForm' => $form->createView(),
         ]);
     }
 }

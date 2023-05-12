@@ -59,7 +59,7 @@ class SecurityController extends AbstractController
 // Send the message
             $result = $mailer->send($message);
 
-            return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('security_login',['login'=>true]);
         }
 
         return $this->render('security/registration.html.twig',[
@@ -92,7 +92,7 @@ class SecurityController extends AbstractController
 
             $manager->persist($user);
             $manager->flush();
-            return $this->redirectToRoute('tricks');
+            return $this->redirectToRoute('tricks',['user'=>true]);
         }
         return $this->render('security/edit.html.twig', [
             'formUser' => $form->createView(),

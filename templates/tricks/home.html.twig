@@ -1,6 +1,75 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if app.request.query.get('user') == true %}
+    <script>
+        // Créer la div du pop-up
+        var popup = document.createElement('div');
+        popup.classList.add('popup');
+        popup.style.backgroundColor = 'green';
+        popup.style.color = 'white';
+        popup.style.position = 'fixed';
+        popup.style.top = '80px';
+        popup.style.right = '10px';
+        popup.style.padding = '10px';
+        popup.style.borderRadius = '10px';
+        popup.innerHTML = 'le profil a été modifier avec succès !';
+
+        // Ajouter la div au body
+        document.body.appendChild(popup);
+
+        // Fermer le pop-up après 3 secondes
+        setTimeout(function() {
+            popup.parentNode.removeChild(popup);
+        }, 3000);
+    </script>
+    {% endif %}
+    {% if app.request.query.get('categ') == true %}
+        <script>
+            // Créer la div du pop-up
+            var popup = document.createElement('div');
+            popup.classList.add('popup');
+            popup.style.backgroundColor = 'green';
+            popup.style.color = 'white';
+            popup.style.position = 'fixed';
+            popup.style.top = '80px';
+            popup.style.right = '10px';
+            popup.style.padding = '10px';
+            popup.style.borderRadius = '10px';
+            popup.innerHTML = 'la categorie a été créée avec succès !';
+
+            // Ajouter la div au body
+            document.body.appendChild(popup);
+
+            // Fermer le pop-up après 3 secondes
+            setTimeout(function() {
+                popup.parentNode.removeChild(popup);
+            }, 3000);
+        </script>
+    {% endif %}
+    {% if app.request.query.get('delete') == true %}
+        <script>
+            // Créer la div du pop-up
+            var popup = document.createElement('div');
+            popup.classList.add('popup');
+            popup.style.backgroundColor = 'red';
+            popup.style.color = 'white';
+            popup.style.position = 'fixed';
+            popup.style.top = '80px';
+            popup.style.right = '10px';
+            popup.style.padding = '10px';
+            popup.style.borderRadius = '10px';
+            popup.innerHTML = 'le trick a été supprimer avec succès !';
+
+            // Ajouter la div au body
+            document.body.appendChild(popup);
+
+            // Fermer le pop-up après 3 secondes
+            setTimeout(function() {
+                popup.parentNode.removeChild(popup);
+            }, 3000);
+        </script>
+    {% endif %}
 <h1>Bienvenue dans ce blog</h1>
 
 <p>Le blog est une ressource en ligne dédiée aux passionnés de ski et de freestyle. Il est conçu pour offrir une expérience utilisateur optimale, avec une interface utilisateur intuitive et facile à naviguer. Les articles sont régulièrement publiés sur les dernières tendances et actualités du monde du ski, écrits par des professionnels de l'industrie, des athlètes de renom et des experts en freestyle, offrant ainsi un contenu de qualité supérieure aux utilisateurs.

@@ -2,6 +2,54 @@
 
 {% block body %}
 
+    {% if app.request.query.get('success') == true %}
+        <script>
+            // Créer la div du pop-up
+            var popup = document.createElement('div');
+            popup.classList.add('popup');
+            popup.style.backgroundColor = 'green';
+            popup.style.color = 'white';
+            popup.style.position = 'fixed';
+            popup.style.top = '80px';
+            popup.style.right = '10px';
+            popup.style.padding = '10px';
+            popup.style.borderRadius = '10px';
+            popup.innerHTML = 'le trick a été créée avec succès !';
+
+            // Ajouter la div au body
+            document.body.appendChild(popup);
+
+            // Fermer le pop-up après 3 secondes
+            setTimeout(function() {
+                popup.parentNode.removeChild(popup);
+            }, 3000);
+        </script>
+     {% endif %}
+
+    {% if app.request.query.get('edit') == true %}
+        <script>
+            // Créer la div du pop-up
+            var popup = document.createElement('div');
+            popup.classList.add('popup');
+            popup.style.backgroundColor = 'green';
+            popup.style.color = 'white';
+            popup.style.position = 'fixed';
+            popup.style.top = '80px';
+            popup.style.right = '10px';
+            popup.style.padding = '10px';
+            popup.style.borderRadius = '10px';
+            popup.innerHTML = 'le trick a été édité avec succès !';
+
+            // Ajouter la div au body
+            document.body.appendChild(popup);
+
+            // Fermer le pop-up après 3 secondes
+            setTimeout(function() {
+                popup.parentNode.removeChild(popup);
+            }, 3000);
+        </script>
+    {% endif %}
+
     <articles>
         <h2>{{ trick.name }}</h2>
         {% if app.user %}
